@@ -1,0 +1,5 @@
+# Working files & OS artifacts
+segundo cerebro/
+*.log
+.DS_Store
+Thumbs.db
