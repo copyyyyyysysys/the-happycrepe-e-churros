@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://thehappycrepe.com.br/sitemap.xml
+Sitemap: https://happycrepechurros.pages.dev/sitemap.xml

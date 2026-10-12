@@ -1,5 +1,13 @@
-# Working files & OS artifacts
+# Internal working notes & second brain
 segundo cerebro/
 *.log
 .DS_Store
 Thumbs.db
+
+# Secrets & credentials protection
+.env
+.env.*
+*.token
+*.pem
+*.key
+credentials.json
