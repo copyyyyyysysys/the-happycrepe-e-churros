@@ -1,5 +1,5 @@
 /**
- * HAPPY CREPE & CHURROS — MAIN SCRIPT
+ * HAPPY CREPE & CHURROS — MAIN SCRIPT (AJUSTE 1)
  * Mairinque / SP • "Onde o crepe é feliz e o churros é irresistível"
  */
 
@@ -14,47 +14,39 @@
     const minutes = now.getMinutes();
     const currentTimeInMinutes = hours * 60 + minutes;
 
-    // Operation window: 19:00 (1140 min) to 22:30 (1350 min)
     const openTime = 19 * 60; // 19:00
     const closeTime = 22 * 60 + 30; // 22:30
 
-    // Operating days: Wednesday (3), Thursday (4), Friday (5), Saturday (6), Sunday (0)
+    // Quarta (3) a Domingo (0)
     const isOpenDay = day === 3 || day === 4 || day === 5 || day === 6 || day === 0;
     const isWithinHours = currentTimeInMinutes >= openTime && currentTimeInMinutes <= closeTime;
 
     let statusText = '';
-    let statusClass = 'dot-pulse'; // green
-    let badgeText = '';
+    let statusClass = 'dot-pulse';
 
     if (isOpenDay && isWithinHours) {
       statusText = 'Aberto Agora • Até às 22:30';
-      badgeText = '🟢 ABERTO AGORA • 19:00 às 22:30';
       statusClass = 'dot-pulse';
     } else if (isOpenDay && currentTimeInMinutes < openTime) {
       const remainingHours = Math.floor((openTime - currentTimeInMinutes) / 60);
       const remainingMin = (openTime - currentTimeInMinutes) % 60;
       statusText = `Abre hoje às 19:00 (${remainingHours > 0 ? remainingHours + 'h ' : ''}${remainingMin}min)`;
-      badgeText = `🟡 ABRE HOJE ÀS 19:00 • Mairinque`;
       statusClass = 'dot-pulse';
     } else {
-      // Closed now
       if (day === 1) {
         statusText = 'Fechado • Abre quarta às 19:00';
       } else if (day === 2) {
         statusText = 'Fechado • Abre amanhã às 19:00';
       } else {
-        // Closed late at night on open days
         if (day === 0) {
           statusText = 'Fechado • Abre quarta às 19:00';
         } else {
           statusText = 'Fechado • Abre amanhã às 19:00';
         }
       }
-      badgeText = '🔴 FECHADO AGORA • Quarta a Domingo 19h–22h30';
       statusClass = 'dot-closed';
     }
 
-    // Update Navbar pill
     const navDot = document.getElementById('nav-status-dot');
     const navText = document.getElementById('nav-status-text');
     if (navDot && navText) {
@@ -62,7 +54,6 @@
       navText.textContent = statusText;
     }
 
-    // Update Hero pill
     const heroDot = document.getElementById('hero-status-dot');
     const heroText = document.getElementById('hero-status-text');
     if (heroDot && heroText) {
@@ -70,7 +61,6 @@
       heroText.textContent = statusText;
     }
 
-    // Update Schedule badge
     const schedDot = document.getElementById('schedule-status-dot');
     const schedText = document.getElementById('schedule-status-text');
     if (schedDot && schedText) {
@@ -78,7 +68,6 @@
       schedText.textContent = statusText;
     }
 
-    // Highlight today's row in the table
     const todayRows = document.querySelectorAll(`.schedule-row[data-day="${day}"]`);
     todayRows.forEach((row) => {
       row.classList.add('active-day');
@@ -87,7 +76,503 @@
     });
   }
 
-  // --- 2. Progressive Light Rail Scroll Mechanic ---
+  // --- 2. Gesto de Abertura (One-Shot Signature) ---
+  function initOpeningGesture() {
+    const burst = document.getElementById('opening-burst');
+    if (!burst) return;
+    setTimeout(() => {
+      burst.remove();
+    }, 1100);
+  }
+
+  // --- 3. Física de Confeitos/Granulados Reativa ao Scroll (Teto Rigoroso) ---
+  function initSprinklesSystem() {
+    const canvas = document.getElementById('sprinkles-canvas');
+    if (!canvas) return;
+
+    // Check reduced motion & save-data
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isSaveData = navigator.connection && navigator.connection.saveData;
+    if (prefersReducedMotion || isSaveData) {
+      canvas.style.display = 'none';
+      return;
+    }
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    // Paleta de confeitos da marca
+    const sprinkleColors = [
+      '#EC388F', // Rosa oficial
+      '#FF6BB6', // Rosa claro
+      '#F59E0B', // Dourado doce de leite
+      '#FBBF24', // Amarelo churro
+      '#38BDF8', // Azul suave
+      '#FFFFFF', // Baunilha/Açúcar
+      '#5C3828'  // Chocolate
+    ];
+
+    const particles = [];
+    const MAX_PARTICLES = 60; // Teto estrito
+    let lastScrollY = window.scrollY;
+    let scrollVelocity = 0;
+    let isLoopRunning = false;
+    let idleTimer = null;
+
+    class Sprinkle {
+      constructor(x, y, speedY) {
+        this.x = x;
+        this.y = y;
+        this.color = sprinkleColors[Math.floor(Math.random() * sprinkleColors.length)];
+        this.width = 3 + Math.random() * 2;
+        this.height = 8 + Math.random() * 6; // Formato cilíndrico de confeito
+        this.angle = Math.random() * Math.PI * 2;
+        this.rotationSpeed = (Math.random() - 0.5) * 0.15;
+        this.vx = (Math.random() - 0.5) * 3;
+        this.vy = speedY * 0.4 + (Math.random() * 2 + 1);
+        this.gravity = 0.12;
+        this.life = 1.0;
+        this.decay = 0.015 + Math.random() * 0.01;
+      }
+
+      update() {
+        this.vy += this.gravity;
+        this.x += this.vx;
+        this.y += this.vy;
+        this.angle += this.rotationSpeed;
+        this.life -= this.decay;
+      }
+
+      draw(c) {
+        if (this.life <= 0) return;
+        c.save();
+        c.translate(this.x, this.y);
+        c.rotate(this.angle);
+        c.globalAlpha = Math.max(0, this.life * 0.9);
+        c.fillStyle = this.color;
+
+        // Desenho de confeito tipo pílula arredondada
+        c.beginPath();
+        c.roundRect
+          ? c.roundRect(-this.width / 2, -this.height / 2, this.width, this.height, 2)
+          : c.rect(-this.width / 2, -this.height / 2, this.width, this.height);
+        c.fill();
+        c.restore();
+      }
+    }
+
+    function spawnSprinkles(amount, direction) {
+      if (document.hidden) return;
+      const spawnCount = Math.min(amount, MAX_PARTICLES - particles.length);
+      for (let i = 0; i < spawnCount; i++) {
+        const x = Math.random() * window.innerWidth;
+        const y = direction > 0 ? -10 : window.innerHeight + 10;
+        const speedY = direction > 0 ? 2 + Math.random() * 3 : -(2 + Math.random() * 3);
+        particles.push(new Sprinkle(x, y, speedY));
+      }
+      if (!isLoopRunning) {
+        isLoopRunning = true;
+        requestAnimationFrame(renderLoop);
+      }
+    }
+
+    function renderLoop() {
+      if (!isLoopRunning) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.update();
+        p.draw(ctx);
+        if (p.life <= 0 || p.y > canvas.height + 30 || p.y < -30) {
+          particles.splice(i, 1);
+        }
+      }
+
+      if (particles.length > 0 && !document.hidden) {
+        requestAnimationFrame(renderLoop);
+      } else {
+        isLoopRunning = false;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      const delta = currentScrollY - lastScrollY;
+      lastScrollY = currentScrollY;
+      scrollVelocity = Math.abs(delta);
+
+      if (scrollVelocity > 5) {
+        const direction = delta > 0 ? 1 : -1;
+        const count = Math.min(4, Math.floor(scrollVelocity / 8));
+        spawnSprinkles(count, direction);
+      }
+
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => {
+        scrollVelocity = 0;
+      }, 250);
+    }, { passive: true });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        particles.length = 0;
+        isLoopRunning = false;
+      }
+    });
+  }
+
+  // --- 4. Produto 3D Interativo de Sabores Reais em Three.js ---
+  function initFlavor3DShowcase() {
+    const canvas = document.getElementById('flavor-3d-canvas');
+    const viewport = document.getElementById('flavor-3d-viewport');
+    const fallback = document.getElementById('flavor-fallback-2d');
+    if (!canvas || !viewport || typeof THREE === 'undefined') {
+      if (fallback) fallback.style.display = 'flex';
+      return;
+    }
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      if (fallback) fallback.style.display = 'flex';
+      canvas.style.display = 'none';
+      return;
+    }
+
+    // Configurações de Sabores Reais
+    const flavors = {
+      'duplo-doce-de-leite': {
+        name: 'Churros Duplo Doce de Leite',
+        price: 'R$ 13',
+        desc: 'Massa frita na hora crocante passada no açúcar e canela, com dose dupla de doce de leite cremoso por dentro e na cobertura.',
+        bodyColor: 0xDE9B52, // Dourado canela
+        toppingColor: 0xD97706, // Doce de leite caramelado
+        sprinkleColor: 0xFDE68A
+      },
+      'nutella': {
+        name: 'Churros Nutella',
+        price: 'R$ 13',
+        desc: 'Churros estaladiço recheado e coberto com legítima Nutella pura de avelã de ponta a ponta.',
+        bodyColor: 0xD98E47,
+        toppingColor: 0x3A1D13, // Chocolate Nutella
+        sprinkleColor: 0xFFFFFF
+      },
+      'costela-queijo': {
+        name: 'Crepe Costela com Queijo',
+        price: 'R$ 14',
+        desc: 'Massa fina e dourada na chapa com costela bovina desfiada artesanal suculenta e queijo derretido.',
+        bodyColor: 0xF5BA67,
+        toppingColor: 0xFCD34D, // Queijo derretido
+        sprinkleColor: 0xB91C1C
+      },
+      'romeu-julieta': {
+        name: 'Crepe Romeu e Julieta',
+        price: 'R$ 9',
+        desc: 'O encontro clássico da doçura: goiabada cascão cremosa quente com queijo derretido de dar água na boca.',
+        bodyColor: 0xF5B55E,
+        toppingColor: 0x9F1239, // Goiabada cascão rubi
+        sprinkleColor: 0xFEF08A
+      }
+    };
+
+    let currentFlavor = 'duplo-doce-de-leite';
+    let isSceneInitialized = false;
+    let renderer, scene, camera, itemGroup, bodyMesh, toppingMesh, sprinklesGroup;
+    let isDragging = false;
+    let prevMouseX = 0;
+    let isVisibleInViewport = false;
+    let animFrameId = null;
+
+    function build3DScene() {
+      if (isSceneInitialized) return;
+      isSceneInitialized = true;
+
+      try {
+        renderer = new THREE.WebGLRenderer({
+          canvas,
+          alpha: true,
+          antialias: true,
+          powerPreference: 'low-power'
+        });
+        renderer.setSize(viewport.clientWidth, viewport.clientHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+      } catch (e) {
+        if (fallback) fallback.style.display = 'flex';
+        canvas.style.display = 'none';
+        return;
+      }
+
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(45, viewport.clientWidth / viewport.clientHeight, 0.1, 100);
+      camera.position.set(0, 0, 7.5);
+
+      // Iluminação de Estúdio Gastronômico
+      const ambientLight = new THREE.AmbientLight(0xFFFFFF, 1.2);
+      scene.add(ambientLight);
+
+      const dirLight = new THREE.DirectionalLight(0xFFF1DE, 2.0);
+      dirLight.position.set(4, 6, 5);
+      scene.add(dirLight);
+
+      const rimLight = new THREE.DirectionalLight(0xEC388F, 1.5);
+      rimLight.position.set(-5, -3, -3);
+      scene.add(rimLight);
+
+      itemGroup = new THREE.Group();
+      scene.add(itemGroup);
+
+      // Corpo estilizado do Churros (cilindro frisado)
+      const bodyGeom = new THREE.CylinderGeometry(0.85, 0.85, 3.8, 16, 1);
+      const bodyMat = new THREE.MeshStandardMaterial({
+        color: flavors[currentFlavor].bodyColor,
+        roughness: 0.7,
+        metalness: 0.1
+      });
+      bodyMesh = new THREE.Mesh(bodyGeom, bodyMat);
+      bodyMesh.rotation.z = Math.PI / 4;
+      itemGroup.add(bodyMesh);
+
+      // Cobertura em espiral/relevo generoso
+      const toppingGeom = new THREE.TorusGeometry(1.05, 0.28, 16, 40);
+      const toppingMat = new THREE.MeshStandardMaterial({
+        color: flavors[currentFlavor].toppingColor,
+        roughness: 0.25, // Brilho cremoso
+        metalness: 0.05
+      });
+      toppingMesh = new THREE.Mesh(toppingGeom, toppingMat);
+      toppingMesh.rotation.x = Math.PI / 2.5;
+      toppingMesh.scale.set(1.0, 1.0, 1.4);
+      itemGroup.add(toppingMesh);
+
+      // Confeitos sobre a peça
+      sprinklesGroup = new THREE.Group();
+      const sprinkleGeom = new THREE.BoxGeometry(0.08, 0.22, 0.08);
+      const sprinkleMat = new THREE.MeshStandardMaterial({
+        color: flavors[currentFlavor].sprinkleColor,
+        roughness: 0.3
+      });
+
+      for (let i = 0; i < 24; i++) {
+        const sm = new THREE.Mesh(sprinkleGeom, sprinkleMat);
+        const u = Math.random() * Math.PI * 2;
+        const r = 0.95 + Math.random() * 0.25;
+        sm.position.set(Math.cos(u) * r, (Math.random() - 0.5) * 2.8, Math.sin(u) * r);
+        sm.rotation.set(Math.random() * 2, Math.random() * 2, Math.random() * 2);
+        sprinklesGroup.add(sm);
+      }
+      itemGroup.add(sprinklesGroup);
+
+      // Eventos de Toque / Arrasto
+      function onPointerDown(e) {
+        isDragging = true;
+        prevMouseX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+      }
+      function onPointerMove(e) {
+        if (!isDragging) return;
+        const x = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+        const deltaX = x - prevMouseX;
+        prevMouseX = x;
+        itemGroup.rotation.y += deltaX * 0.012;
+      }
+      function onPointerUp() {
+        isDragging = false;
+      }
+
+      canvas.addEventListener('mousedown', onPointerDown);
+      window.addEventListener('mousemove', onPointerMove);
+      window.addEventListener('mouseup', onPointerUp);
+
+      canvas.addEventListener('touchstart', onPointerDown, { passive: true });
+      window.addEventListener('touchmove', onPointerMove, { passive: true });
+      window.addEventListener('touchend', onPointerUp);
+
+      function render() {
+        if (!isVisibleInViewport || document.hidden) return;
+        if (!isDragging) {
+          itemGroup.rotation.y += 0.006;
+          itemGroup.rotation.x = Math.sin(Date.now() * 0.001) * 0.12;
+        }
+        renderer.render(scene, camera);
+        animFrameId = requestAnimationFrame(render);
+      }
+
+      render();
+    }
+
+    function updateFlavor(flavorKey) {
+      if (!flavors[flavorKey]) return;
+      currentFlavor = flavorKey;
+      const data = flavors[flavorKey];
+
+      // Atualiza 3D Materials
+      if (bodyMesh && toppingMesh) {
+        bodyMesh.material.color.setHex(data.bodyColor);
+        toppingMesh.material.color.setHex(data.toppingColor);
+        if (sprinklesGroup) {
+          sprinklesGroup.children.forEach((c) => {
+            c.material.color.setHex(data.sprinkleColor);
+          });
+        }
+      }
+
+      // Atualiza Textos
+      const nameEl = document.getElementById('flavor-display-name');
+      const descEl = document.getElementById('flavor-display-desc');
+      const ctaBtn = document.getElementById('flavor-order-cta');
+      const ctaText = document.getElementById('flavor-order-cta-text');
+
+      if (nameEl) nameEl.textContent = data.name;
+      if (descEl) descEl.textContent = data.desc;
+      if (ctaText) ctaText.textContent = `Pedir Este Sabor no WhatsApp • ${data.price}`;
+      if (ctaBtn) {
+        const textMsg = encodeURIComponent(`Olá! Vim pelo site e quero pedir o ${data.name} (${data.price}).`);
+        ctaBtn.href = `https://wa.me/5511940804524?text=${textMsg}`;
+      }
+    }
+
+    // Lazy load Three.js cena quando aproxima da viewport
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              isVisibleInViewport = true;
+              if (!isSceneInitialized) build3DScene();
+              else if (!animFrameId) render();
+            } else {
+              isVisibleInViewport = false;
+              if (animFrameId) {
+                cancelAnimationFrame(animFrameId);
+                animFrameId = null;
+              }
+            }
+          });
+        },
+        { rootMargin: '200px' }
+      );
+      observer.observe(viewport);
+    } else {
+      build3DScene();
+    }
+
+    // Botões de Seleção de Sabor
+    const pillButtons = document.querySelectorAll('.flavor-pill-btn');
+    pillButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        pillButtons.forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        const key = btn.getAttribute('data-flavor');
+        updateFlavor(key);
+      });
+    });
+  }
+
+  // --- 5. Parte B: Cardápio Sob Demanda (Acordeão Exclusivo) ---
+  function initOnDemandMenu() {
+    const triggers = document.querySelectorAll('.menu-cat-trigger');
+    const cards = document.querySelectorAll('.menu-cat-card');
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const card = trigger.closest('.menu-cat-card');
+        const isAlreadyOpen = card.classList.contains('is-open');
+
+        // Contrato de exclusividade: fecha todas as outras seções
+        cards.forEach((c) => {
+          c.classList.remove('is-open');
+          const btn = c.querySelector('.menu-cat-trigger');
+          if (btn) {
+            btn.setAttribute('aria-expanded', 'false');
+            const actionText = btn.querySelector('.cat-action-text');
+            if (actionText) actionText.textContent = 'Ver Sabores';
+          }
+        });
+
+        // Se não estava aberta, abre a clicada
+        if (!isAlreadyOpen) {
+          card.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+          const actionText = trigger.querySelector('.cat-action-text');
+          if (actionText) actionText.textContent = 'Fechar';
+        }
+      });
+    });
+
+    // Tecla Escape fecha a seção aberta e devolve foco
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const openCard = document.querySelector('.menu-cat-card.is-open');
+        if (openCard) {
+          openCard.classList.remove('is-open');
+          const btn = openCard.querySelector('.menu-cat-trigger');
+          if (btn) {
+            btn.setAttribute('aria-expanded', 'false');
+            btn.focus();
+            const actionText = btn.querySelector('.cat-action-text');
+            if (actionText) actionText.textContent = 'Ver Sabores';
+          }
+        }
+      }
+    });
+  }
+
+  // --- 6. Mobile Fixed Order Bar (Barra Fixa Não-Intrusiva) ---
+  function initMobileOrderBar() {
+    const mobileBar = document.getElementById('mobile-order-bar');
+    const heroCluster = document.getElementById('hero-cta-cluster');
+    const footerCluster = document.getElementById('footer-cta-cluster');
+
+    if (!mobileBar || !heroCluster || !footerCluster) return;
+
+    let isHeroPast = false;
+    let isFooterVisible = false;
+
+    function updateBarVisibility() {
+      if (window.innerWidth > 768) {
+        mobileBar.classList.remove('active');
+        return;
+      }
+      if (isHeroPast && !isFooterVisible) {
+        mobileBar.classList.add('active');
+      } else {
+        mobileBar.classList.remove('active');
+      }
+    }
+
+    if ('IntersectionObserver' in window) {
+      const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          isHeroPast = !e.isIntersecting;
+          updateBarVisibility();
+        });
+      }, { threshold: 0.1 });
+      heroObserver.observe(heroCluster);
+
+      const footerObserver = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          isFooterVisible = e.isIntersecting;
+          updateBarVisibility();
+        });
+      }, { threshold: 0.1 });
+      footerObserver.observe(footerCluster);
+    }
+
+    window.addEventListener('resize', updateBarVisibility, { passive: true });
+  }
+
+  // --- 7. Progressive Light Rail Scroll Mechanic ---
   function initProgressiveLightRail() {
     const journeySection = document.getElementById('jornada');
     const railFill = document.getElementById('light-rail-fill');
@@ -100,19 +585,16 @@
       const rect = journeySection.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
 
-      // Calculate progress across journey section
       const totalDist = rect.height;
       const currentScroll = viewportHeight * 0.5 - rect.top;
       let progress = currentScroll / totalDist;
-
       progress = Math.max(0, Math.min(1, progress));
 
       const percentage = (progress * 100).toFixed(1);
       railFill.style.height = `${percentage}%`;
       railNode.style.top = `${percentage}%`;
 
-      // Activate steps as progress reaches them
-      steps.forEach((step, index) => {
+      steps.forEach((step) => {
         const stepRect = step.getBoundingClientRect();
         if (stepRect.top < viewportHeight * 0.65) {
           step.classList.add('active');
@@ -127,126 +609,11 @@
     updateLightRail();
   }
 
-  // --- 3. Interactive Menu Filter & Bag Builder ---
-  function initMenuAndBag() {
-    const filterButtons = document.querySelectorAll('.menu-tab-btn');
-    const menuCards = document.querySelectorAll('.menu-item-card');
-    const bagBar = document.getElementById('order-bag-bar');
-    const bagBadge = document.getElementById('bag-count-badge');
-    const bagTotal = document.getElementById('bag-total-amount');
-    const bagCheckoutBtn = document.getElementById('bag-checkout-btn');
-
-    const bag = new Map(); // key: itemName, value: { name, price, qty }
-
-    // Tab Filtering
-    filterButtons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        filterButtons.forEach((b) => {
-          b.classList.remove('active');
-          b.setAttribute('aria-selected', 'false');
-        });
-        btn.classList.add('active');
-        btn.setAttribute('aria-selected', 'true');
-
-        const category = btn.getAttribute('data-category');
-
-        menuCards.forEach((card) => {
-          const cardCat = card.getAttribute('data-category');
-          if (category === 'all' || cardCat === category) {
-            card.style.display = 'flex';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-
-    // Add / Remove from Bag
-    menuCards.forEach((card) => {
-      const addBtn = card.querySelector('[data-action="add"]');
-      const name = card.getAttribute('data-name');
-      const price = parseFloat(card.getAttribute('data-price')) || 0;
-
-      if (!addBtn || !name) return;
-
-      addBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-
-        if (bag.has(name)) {
-          // Remove
-          bag.delete(name);
-          addBtn.classList.remove('in-bag');
-          addBtn.innerHTML = `
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            <span>Pedir</span>
-          `;
-        } else {
-          // Add
-          bag.set(name, { name, price, qty: 1 });
-          addBtn.classList.add('in-bag');
-          addBtn.innerHTML = `
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>No Pedido</span>
-          `;
-        }
-
-        updateBagDisplay();
-      });
-    });
-
-    function updateBagDisplay() {
-      let count = 0;
-      let total = 0;
-
-      bag.forEach((item) => {
-        count += item.qty;
-        total += item.price * item.qty;
-      });
-
-      if (bagBadge) bagBadge.textContent = count;
-      if (bagTotal) bagTotal.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
-
-      if (count > 0 && bagBar) {
-        bagBar.classList.add('visible');
-      } else if (bagBar) {
-        bagBar.classList.remove('visible');
-      }
-    }
-
-    // Checkout via WhatsApp
-    if (bagCheckoutBtn) {
-      bagCheckoutBtn.addEventListener('click', () => {
-        if (bag.size === 0) return;
-
-        let messageLines = [
-          'Olá! Montei meu pedido no site do Happy Crepe & Churros:',
-          ''
-        ];
-
-        let total = 0;
-        bag.forEach((item) => {
-          const sub = item.price * item.qty;
-          total += sub;
-          messageLines.push(`• ${item.qty}x ${item.name} — R$ ${sub.toFixed(2).replace('.', ',')}`);
-        });
-
-        messageLines.push('');
-        messageLines.push(`*Total estimado:* R$ ${total.toFixed(2).replace('.', ',')}`);
-        messageLines.push('Gostaria de confirmar o pedido e combinar a entrega/retirada!');
-
-        const encodedMessage = encodeURIComponent(messageLines.join('\n'));
-        const targetUrl = `https://wa.me/5511940804524?text=${encodedMessage}`;
-        window.open(targetUrl, '_blank', 'noopener,noreferrer');
-      });
-    }
-  }
-
-  // --- 4. Scroll Reveal (IntersectionObserver with Zero-Lag Precision) ---
+  // --- 8. Scroll Reveal (IntersectionObserver com Zero-Lag) ---
   function initScrollReveal() {
     const reveals = document.querySelectorAll('.reveal-init');
     if (reveals.length === 0) return;
 
-    // Respect reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       reveals.forEach((el) => el.classList.add('reveal-active'));
@@ -263,154 +630,30 @@
             }
           });
         },
-        {
-          rootMargin: '0px 0px -50px 0px',
-          threshold: 0.1
-        }
+        { rootMargin: '0px 0px -40px 0px', threshold: 0.08 }
       );
 
       reveals.forEach((el) => observer.observe(el));
     } else {
-      // Fallback
       reveals.forEach((el) => el.classList.add('reveal-active'));
     }
   }
 
-  // --- 5. Three.js Lightweight Ambient Embers Canvas ---
-  function initAmbientParticles() {
-    const canvas = document.getElementById('particle-canvas');
-    if (!canvas || typeof THREE === 'undefined') return;
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      canvas.style.display = 'none';
-      return;
-    }
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 250;
-
-    let renderer;
-    try {
-      renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false, powerPreference: 'low-power' });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-    } catch (e) {
-      canvas.style.display = 'none';
-      return;
-    }
-
-    // Create 45 subtle golden/amber & pink embers
-    const particleCount = 45;
-    const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
-    const speeds = new Float32Array(particleCount);
-
-    const pinkColor = new THREE.Color('#EC388F');
-    const amberColor = new THREE.Color('#F59E0B');
-
-    for (let i = 0; i < particleCount; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 500;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 500;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 200;
-
-      const mixedColor = Math.random() > 0.5 ? amberColor : pinkColor;
-      colors[i * 3] = mixedColor.r;
-      colors[i * 3 + 1] = mixedColor.g;
-      colors[i * 3 + 2] = mixedColor.b;
-
-      speeds[i] = 0.2 + Math.random() * 0.35;
-    }
-
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-    // Particle Material
-    const material = new THREE.PointsMaterial({
-      size: 4,
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.55,
-      blending: THREE.AdditiveBlending
-    });
-
-    const particles = new THREE.Points(geometry, material);
-    scene.add(particles);
-
-    let isVisible = true;
-    let animationFrameId;
-
-    function animate() {
-      if (!isVisible || document.hidden) return;
-
-      const pos = geometry.attributes.position.array;
-      for (let i = 0; i < particleCount; i++) {
-        pos[i * 3 + 1] -= speeds[i]; // float slowly down
-        if (pos[i * 3 + 1] < -250) {
-          pos[i * 3 + 1] = 250;
-          pos[i * 3] = (Math.random() - 0.5) * 500;
-        }
-      }
-      geometry.attributes.position.needsUpdate = true;
-      particles.rotation.y += 0.0003;
-
-      renderer.render(scene, camera);
-      animationFrameId = requestAnimationFrame(animate);
-    }
-
-    function onResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-
-    window.addEventListener('resize', onResize, { passive: true });
-
-    // Pause on visibility change
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        isVisible = false;
-        cancelAnimationFrame(animationFrameId);
-      } else {
-        isVisible = true;
-        animate();
-      }
-    });
-
-    animate();
-  }
-
-  // --- 6. Global Escape & Keyboard Handlers ---
-  function initKeyboardAccessibility() {
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        // Deselect or close open items
-        const bagBar = document.getElementById('order-bag-bar');
-        if (bagBar && bagBar.classList.contains('visible')) {
-          // Hide if desired or dismiss
-        }
-      }
-    });
-  }
-
-  // --- Initialize when DOM is ready ---
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      initScheduleEngine();
-      initProgressiveLightRail();
-      initMenuAndBag();
-      initScrollReveal();
-      initAmbientParticles();
-      initKeyboardAccessibility();
-    });
-  } else {
+  // --- Inicialização DOM ---
+  function initAll() {
     initScheduleEngine();
+    initOpeningGesture();
+    initSprinklesSystem();
+    initFlavor3DShowcase();
+    initOnDemandMenu();
+    initMobileOrderBar();
     initProgressiveLightRail();
-    initMenuAndBag();
     initScrollReveal();
-    initAmbientParticles();
-    initKeyboardAccessibility();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAll);
+  } else {
+    initAll();
   }
 })();

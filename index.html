@@ -34,7 +34,7 @@
   <link rel="preload" as="image" href="/assets/mascote-happy.webp" type="image/webp">
 
   <!-- Core Stylesheet -->
-  <link rel="stylesheet" href="/css/style.css?v=20261011">
+  <link rel="stylesheet" href="/css/style.css?v=20261011_v2">
 
   <!-- Schema.org Structured Data (Strictly Confirmed Data Only) -->
   <script type="application/ld+json">
@@ -72,8 +72,11 @@
   </script>
 </head>
 <body class="site-body">
-  <!-- Subtle Background Canvas (Three.js warm amber embers) -->
-  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+  <!-- Gesto de Abertura (One-shot color signature) -->
+  <div class="opening-burst" id="opening-burst" aria-hidden="true"></div>
+
+  <!-- Canvas 2D de Granulados/Confeitos do Happy Crepe (Ativado por Scroll) -->
+  <canvas id="sprinkles-canvas" aria-hidden="true"></canvas>
 
   <!-- Ambient Light Orbs -->
   <div class="ambient-glow ambient-glow-1" aria-hidden="true"></div>
@@ -81,11 +84,11 @@
   <div class="ambient-glow ambient-glow-3" aria-hidden="true"></div>
   <div class="noise-overlay" aria-hidden="true"></div>
 
-  <!-- Sticky Navbar (Resilient & Compact) -->
+  <!-- Sticky Navbar -->
   <header class="site-nav" id="main-nav">
     <div class="container nav-container">
       <a href="#hero" class="nav-brand" aria-label="Início Happy Crepe e Churros">
-        <img src="/assets/mascote-happy.webp" alt="Mascote Happy Crepe" class="nav-mascot" width="40" height="40">
+        <img src="/assets/mascote-happy.webp" alt="Mascote Happy Crepe" class="nav-mascot" width="42" height="42">
         <div class="nav-brand-text">
           <span class="nav-brand-name">Happy<span>.</span></span>
           <span class="nav-brand-sub">Crepe & Churros</span>
@@ -107,9 +110,9 @@
 
   <main id="main-content">
     <!-- ======================================================================
-         HERO SECTION — ANTI-TRAVA E-01 (AUTHENTIC, MEDIA-LAYERED COMPOSITION)
+         HERO SECTION — SCENE 1 (VIBRANT ATMOSPHERE FIELD)
          ====================================================================== -->
-    <section class="hero-section" id="hero">
+    <section class="hero-section scene-hero" id="hero">
       <div class="container hero-layout">
         <!-- Content Column -->
         <div class="hero-content">
@@ -131,7 +134,7 @@
           </p>
 
           <!-- Primary Actions Cluster (Right Above the Fold) -->
-          <div class="hero-actions">
+          <div class="hero-actions" id="hero-cta-cluster">
             <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener noreferrer" class="btn-shiny btn-primary" id="hero-btn-wpp">
               <span class="btn-shiny-text">Fazer Pedido no WhatsApp</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -143,7 +146,7 @@
             </a>
           </div>
 
-          <!-- Tangible Operational Metrics -->
+          <!-- Operational Metrics -->
           <div class="hero-metrics">
             <div class="metric-item">
               <div class="metric-value">35–45<span>min</span></div>
@@ -198,10 +201,17 @@
       </div>
     </section>
 
+    <!-- Costura Orgânica por Forma entre Cenas -->
+    <div class="scene-divider-curve" aria-hidden="true">
+      <svg viewBox="0 0 1200 48" preserveAspectRatio="none">
+        <path d="M0,0 C300,44 900,44 1200,0 L1200,48 L0,48 Z" fill="#150F1D"/>
+      </svg>
+    </div>
+
     <!-- ======================================================================
-         OFFICIAL PILLARS STRIP — TRANSPARENCY & ACCURACY
+         OFFICIAL PILLARS STRIP — SCENE 2
          ====================================================================== -->
-    <section class="pillars-strip" aria-label="Informações Oficiais de Atendimento">
+    <section class="pillars-strip scene-pillars" aria-label="Informações Oficiais de Atendimento">
       <div class="container">
         <div class="pillars-grid">
           <!-- Pillar 1: Local -->
@@ -244,9 +254,9 @@
     </section>
 
     <!-- ======================================================================
-         PROGRESSIVE LIGHT RAIL — SCROLL-DRIVEN MOTION ANCHOR
+         PROGRESSIVE LIGHT RAIL — SCENE 3 (RITMO DE ENERGIA & JORNADA)
          ====================================================================== -->
-    <section class="progressive-journey" id="jornada" aria-label="A Experiência Happy Crepe">
+    <section class="progressive-journey scene-calm" id="jornada" aria-label="A Experiência Happy Crepe">
       <div class="container">
         <div class="section-header reveal-init">
           <div class="section-tag">Tradição & Crocância</div>
@@ -321,14 +331,14 @@
             <div class="journey-card-content">
               <span class="step-num-badge">ETAPA 03</span>
               <h3 class="journey-step-title">Seu pedido quentinho sem fila.</h3>
-              <p class="journey-step-text">Você escolhe no cardápio online ou monta sua lista aqui mesmo e envia direto pro WhatsApp do trailer. Em poucos minutos seu pedido já entra na chapa.</p>
+              <p class="journey-step-text">Você escolhe no cardápio online ou combina no WhatsApp do trailer. Em poucos minutos seu pedido já entra na chapa e sai quentinho.</p>
             </div>
             <div class="journey-visual-box">
               <span class="box-highlight-tag">Agilidade • Mairinque</span>
               <ul class="box-taste-list">
                 <li class="box-taste-item">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Mensagem com os itens pré-selecionados pronta no WhatsApp</span>
+                  <span>Mensagem com os itens já estruturada pronta para envio</span>
                 </li>
                 <li class="box-taste-item">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
@@ -336,7 +346,7 @@
                 </li>
                 <li class="box-taste-item">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Retirada sem complicação: de 10 a 20 minutos</span>
+                  <span>Retirada rápida no trailer: de 10 a 20 minutos</span>
                 </li>
               </ul>
             </div>
@@ -346,581 +356,589 @@
     </section>
 
     <!-- ======================================================================
-         INTERACTIVE MENU SECTION — ONLY LOCATION WITH PRICES (CONVERSION ENGINE)
+         THREE.JS INTERACTIVE 3D PRODUCT SHOWCASE — SCENE 4
          ====================================================================== -->
-    <section class="section-flow menu-section" id="cardapio" aria-label="Cardápio Oficial Happy Crepe">
+    <section class="flavor-3d-section scene-3d" id="vitrine-3d" aria-label="Vitrine 3D dos Sabores">
       <div class="container">
         <div class="section-header reveal-init">
-          <div class="section-tag amber-tag">Cardápio Oficial</div>
-          <h2 class="section-title">Escolha seu sabor favorito.</h2>
-          <p class="section-subtitle">Itens e valores conferidos diretamente no sistema oficial da marca. Toque em <strong>"+"</strong> para montar sua sacola e enviar pronto no WhatsApp!</p>
+          <div class="section-tag amber-tag">Mais Vida & Sabor</div>
+          <h2 class="section-title">Explore os clássicos em 3D.</h2>
+          <p class="section-subtitle">Toque nos sabores para ver a troca de recheio e arraste para girar a peça artesanal.</p>
         </div>
 
-        <!-- Category Tabs Filter -->
-        <div class="menu-tabs-wrapper reveal-init" role="tablist" aria-label="Categorias do cardápio">
-          <button class="menu-tab-btn active" data-category="all" role="tab" aria-selected="true" id="tab-all">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            Todos os Itens
-          </button>
-          <button class="menu-tab-btn" data-category="crepes-salgados" role="tab" aria-selected="false" id="tab-crepes-salgados">
-            Crepes Salgados
-          </button>
-          <button class="menu-tab-btn" data-category="crepes-doces" role="tab" aria-selected="false" id="tab-crepes-doces">
-            Crepes Doces
-          </button>
-          <button class="menu-tab-btn" data-category="churros" role="tab" aria-selected="false" id="tab-churros">
-            Churros
-          </button>
-          <button class="menu-tab-btn" data-category="adicionais" role="tab" aria-selected="false" id="tab-adicionais">
-            Adicionais
-          </button>
-          <button class="menu-tab-btn" data-category="bebidas" role="tab" aria-selected="false" id="tab-bebidas">
-            Bebidas
-          </button>
-        </div>
-
-        <!-- Menu Items Grid (Filled with strictly official items & prices) -->
-        <div class="menu-grid" id="menu-items-grid">
-          <!-- Items will be rendered via JS or static fallback for JS-off -->
-          <!-- Static accessible fallback items -->
-
-          <!-- Crepes Salgados -->
-          <article class="menu-item-card" data-category="crepes-salgados" data-name="Calabresa Queijo" data-price="10">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Calabresa Queijo</h3>
-                <span class="menu-item-price">R$ 10</span>
+        <div class="flavor-3d-card reveal-init">
+          <div class="flavor-3d-layout">
+            <!-- 3D Interactive Viewport -->
+            <div class="flavor-3d-viewport" id="flavor-3d-viewport">
+              <canvas id="flavor-3d-canvas" aria-label="Modelo 3D interativo do produto"></canvas>
+              
+              <!-- Fallback 2D para reduced-motion ou sem WebGL -->
+              <div class="flavor-fallback-2d" id="flavor-fallback-2d">
+                <div class="flavor-fallback-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="40" height="40"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/></svg>
+                </div>
+                <h4 style="font-size: 1.15rem; font-weight: 800; color: #fff;">Churros & Crepes Artesanais</h4>
+                <p style="font-size: 0.85rem; color: var(--color-text-muted);">Recheados de ponta a ponta na chapa quente de Mairinque.</p>
               </div>
-              <span class="menu-item-category-tag">Crepe Salgado</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Massa artesanal dobrada com calabresa fatiada e queijo derretido.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Calabresa Queijo à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
 
-          <article class="menu-item-card" data-category="crepes-salgados" data-name="Calabresa Requeijão" data-price="10">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Calabresa Requeijão</h3>
-                <span class="menu-item-price">R$ 10</span>
+              <div class="flavor-3d-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="m14 19 3 3 3-3"/><path d="m10 5-3-3-3 3"/><path d="M21 22v-6a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v6"/><path d="M3 2v6a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V2"/></svg>
+                <span>Arraste para girar 360°</span>
               </div>
-              <span class="menu-item-category-tag">Crepe Salgado</span>
             </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Calabresa moída/fatiada com requeijão cremoso na chapa quente.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Calabresa Requeijão à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
 
-          <article class="menu-item-card" data-category="crepes-salgados" data-name="Costela com Queijo" data-price="14">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Costela com Queijo</h3>
-                <span class="menu-item-price">R$ 14</span>
+            <!-- Flavor Selector Controls -->
+            <div class="flavor-selector-wrap">
+              <span style="font-size: 0.82rem; font-weight: 700; color: var(--brand-pink-light); text-transform: uppercase; letter-spacing: 0.05em;">Escolha o sabor para visualizar:</span>
+              
+              <div class="flavor-pills-grid" role="tablist" aria-label="Seleção de sabor 3D">
+                <!-- Sabor 1 -->
+                <button class="flavor-pill-btn active" data-flavor="duplo-doce-de-leite" data-price="13" role="tab" aria-selected="true" id="flavor-btn-1">
+                  <span>Duplo Doce de Leite</span>
+                  <span class="flavor-pill-price">R$ 13</span>
+                </button>
+
+                <!-- Sabor 2 -->
+                <button class="flavor-pill-btn" data-flavor="nutella" data-price="13" role="tab" aria-selected="false" id="flavor-btn-2">
+                  <span>Churros Nutella</span>
+                  <span class="flavor-pill-price">R$ 13</span>
+                </button>
+
+                <!-- Sabor 3 -->
+                <button class="flavor-pill-btn" data-flavor="costela-queijo" data-price="14" role="tab" aria-selected="false" id="flavor-btn-3">
+                  <span>Crepe Costela c/ Queijo</span>
+                  <span class="flavor-pill-price">R$ 14</span>
+                </button>
+
+                <!-- Sabor 4 -->
+                <button class="flavor-pill-btn" data-flavor="romeu-julieta" data-price="9" role="tab" aria-selected="false" id="flavor-btn-4">
+                  <span>Crepe Romeu & Julieta</span>
+                  <span class="flavor-pill-price">R$ 9</span>
+                </button>
               </div>
-              <span class="menu-item-category-tag">Crepe Salgado • Destaque</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Costela desfiada suculenta temperada com queijo derretido na chapa.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Costela com Queijo à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
 
-          <article class="menu-item-card" data-category="crepes-salgados" data-name="Costela Requeijão" data-price="14">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Costela Requeijão</h3>
-                <span class="menu-item-price">R$ 14</span>
+              <!-- Dynamic Detail Box -->
+              <div class="flavor-details-card">
+                <h4 class="flavor-detail-title" id="flavor-display-name">Churros Duplo Doce de Leite</h4>
+                <p class="flavor-detail-desc" id="flavor-display-desc">
+                  Massa douradinha frita na hora, passada no açúcar e canela, com dose dupla de doce de leite cremoso no recheio e na cobertura.
+                </p>
+                <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20Churros%20Duplo%20Doce%20de%20Leite%20(R$%2013)." target="_blank" rel="noopener noreferrer" class="btn-shiny btn-primary" id="flavor-order-cta" style="width: 100%; min-height: 46px; font-size: 0.9rem;">
+                  <span class="btn-shiny-text" id="flavor-order-cta-text">Pedir Este Sabor no WhatsApp • R$ 13</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </a>
               </div>
-              <span class="menu-item-category-tag">Crepe Salgado</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Costela bovina desfiada com requeijão cremoso artesanal.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Costela Requeijão à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="crepes-salgados" data-name="Dois Queijos" data-price="10">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Dois Queijos</h3>
-                <span class="menu-item-price">R$ 10</span>
-              </div>
-              <span class="menu-item-category-tag">Crepe Salgado</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Combinação equilibrada e cremosa de queijos derretidos.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Dois Queijos à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="crepes-salgados" data-name="Frango Cheddar" data-price="10">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Frango Cheddar</h3>
-                <span class="menu-item-price">R$ 10</span>
-              </div>
-              <span class="menu-item-category-tag">Crepe Salgado</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Frango desfiado macio com cobertura generosa de queijo cheddar.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Frango Cheddar à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="crepes-salgados" data-name="Frango Requeijão" data-price="10">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Frango Requeijão</h3>
-                <span class="menu-item-price">R$ 10</span>
-              </div>
-              <span class="menu-item-category-tag">Crepe Salgado</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">O clássico frango temperadinho com requeijão cremoso suave.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Frango Requeijão à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="crepes-salgados" data-name="Pizza" data-price="10">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Pizza</h3>
-                <span class="menu-item-price">R$ 10</span>
-              </div>
-              <span class="menu-item-category-tag">Crepe Salgado</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Queijo derretido, presunto, tomate fresco e orégano aromático.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Pizza à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="crepes-salgados" data-name="Queijo" data-price="10">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Queijo</h3>
-                <span class="menu-item-price">R$ 10</span>
-              </div>
-              <span class="menu-item-category-tag">Crepe Salgado</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Simples e irresistível: queijo derretido na chapa quente.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Queijo à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <!-- Crepes Doces -->
-          <article class="menu-item-card" data-category="crepes-doces" data-name="Ao Leite" data-price="10">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Ao Leite</h3>
-                <span class="menu-item-price">R$ 10</span>
-              </div>
-              <span class="menu-item-category-tag">Crepe Doce</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Chocolate ao leite cremoso derretido na massa quentinha.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Ao Leite à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="crepes-doces" data-name="Nutella" data-price="14">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Nutella</h3>
-                <span class="menu-item-price">R$ 14</span>
-              </div>
-              <span class="menu-item-category-tag">Crepe Doce • Favorito</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Nutella legítima pura e aveludada na massa fininha.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Nutella à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="crepes-doces" data-name="Prestígio" data-price="9">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Prestígio</h3>
-                <span class="menu-item-price">R$ 9</span>
-              </div>
-              <span class="menu-item-category-tag">Crepe Doce</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Chocolate derretido com flocos de coco fresco ralado.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Prestígio à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="crepes-doces" data-name="Romeu e Julieta" data-price="9">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Romeu e Julieta</h3>
-                <span class="menu-item-price">R$ 9</span>
-              </div>
-              <span class="menu-item-category-tag">Crepe Doce</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Queijo derretido com goiabada cascão na temperatura perfeita.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Romeu e Julieta à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="crepes-doces" data-name="Stikadinho" data-price="10">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Stikadinho</h3>
-                <span class="menu-item-price">R$ 10</span>
-              </div>
-              <span class="menu-item-category-tag">Crepe Doce</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Chocolate com recheio de morango tipo Stikadinho cremoso.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Stikadinho à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <!-- Churros -->
-          <article class="menu-item-card" data-category="churros" data-name="Recheado Doce de Leite" data-price="10">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Recheado Doce de Leite</h3>
-                <span class="menu-item-price">R$ 10</span>
-              </div>
-              <span class="menu-item-category-tag">Churros Tradicional</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Churros tradicional frito na hora com doce de leite caseiro.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Recheado Doce de Leite à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="churros" data-name="Recheado Chocolate" data-price="10">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Recheado Chocolate</h3>
-                <span class="menu-item-price">R$ 10</span>
-              </div>
-              <span class="menu-item-category-tag">Churros Tradicional</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Churros frito na hora com recheio de chocolate aveludado.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Recheado Chocolate à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="churros" data-name="Duplo Doce de Leite" data-price="13">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Duplo Doce de Leite</h3>
-                <span class="menu-item-price">R$ 13</span>
-              </div>
-              <span class="menu-item-category-tag">Churros Duplo</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Dupla dose de doce de leite com recheio interno e cobertura.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Duplo Doce de Leite à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="churros" data-name="Duplo Chocolate" data-price="13">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Duplo Chocolate</h3>
-                <span class="menu-item-price">R$ 13</span>
-              </div>
-              <span class="menu-item-category-tag">Churros Duplo</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Dose dobrada de chocolate com crocância extrema.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Duplo Chocolate à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="churros" data-name="Nutella" data-price="13">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Nutella</h3>
-                <span class="menu-item-price">R$ 13</span>
-              </div>
-              <span class="menu-item-category-tag">Churros Especial</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Churros crocante com Nutella pura de ponta a ponta.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Churros Nutella à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="churros" data-name="Nutella Duplo" data-price="16">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Nutella Duplo</h3>
-                <span class="menu-item-price">R$ 16</span>
-              </div>
-              <span class="menu-item-category-tag">Churros Duplo Especial</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">O ápice da indulgência: dupla dose de Nutella cremosa.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Nutella Duplo à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <!-- Adicionais -->
-          <article class="menu-item-card" data-category="adicionais" data-name="Fruta Banana" data-price="4">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Fruta Banana</h3>
-                <span class="menu-item-price">R$ 4</span>
-              </div>
-              <span class="menu-item-category-tag">Adicional</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Fatias de banana fresca para combinar com seu crepe ou churros.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Fruta Banana à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="adicionais" data-name="Fruta Morango" data-price="4">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Fruta Morango</h3>
-                <span class="menu-item-price">R$ 4</span>
-              </div>
-              <span class="menu-item-category-tag">Adicional</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Morangos frescos picadinhos para acompanhar doces e crepes.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Fruta Morango à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="adicionais" data-name="Fruta Uva Verde" data-price="4">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Fruta Uva Verde</h3>
-                <span class="menu-item-price">R$ 4</span>
-              </div>
-              <span class="menu-item-category-tag">Adicional</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Uvas verdes sem semente frescas e crocantes.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Fruta Uva Verde à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="adicionais" data-name="Kinder Bueno" data-price="5">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Kinder Bueno</h3>
-                <span class="menu-item-price">R$ 5</span>
-              </div>
-              <span class="menu-item-category-tag">Adicional Premium</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Pedaços de Kinder Bueno crocante com recheio de avelã.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Kinder Bueno à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="adicionais" data-name="Stikadinho adicional" data-price="4">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Stikadinho adicional</h3>
-                <span class="menu-item-price">R$ 4</span>
-              </div>
-              <span class="menu-item-category-tag">Adicional</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Stikadinho extra para turbinar seu crepe doce ou churros.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Stikadinho adicional à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <!-- Bebidas -->
-          <article class="menu-item-card" data-category="bebidas" data-name="Coca-Cola" data-price="7">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Coca-Cola</h3>
-                <span class="menu-item-price">R$ 7</span>
-              </div>
-              <span class="menu-item-category-tag">Bebida Gelada</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Lata geladinha para harmonizar com seu lanche.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Coca-Cola à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="bebidas" data-name="Coca-Cola Zero" data-price="7">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Coca-Cola Zero</h3>
-                <span class="menu-item-price">R$ 7</span>
-              </div>
-              <span class="menu-item-category-tag">Bebida Gelada</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Lata zero açúcar bem gelada.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Coca-Cola Zero à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="bebidas" data-name="Guaraná" data-price="7">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Guaraná</h3>
-                <span class="menu-item-price">R$ 7</span>
-              </div>
-              <span class="menu-item-category-tag">Bebida Gelada</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Guaraná gelado na lata.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Guaraná à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="bebidas" data-name="Suco Nativo" data-price="4">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Suco Nativo</h3>
-                <span class="menu-item-price">R$ 4</span>
-              </div>
-              <span class="menu-item-category-tag">Bebida</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Suco natural refrescante embalado.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Suco Nativo à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-
-          <article class="menu-item-card" data-category="bebidas" data-name="Água" data-price="4">
-            <div>
-              <div class="menu-item-header">
-                <h3 class="menu-item-name">Água</h3>
-                <span class="menu-item-price">R$ 4</span>
-              </div>
-              <span class="menu-item-category-tag">Bebida</span>
-            </div>
-            <div class="menu-item-actions">
-              <span class="pillar-desc">Água mineral sem gás 500ml bem gelada.</span>
-              <button class="btn-add-item" data-action="add" aria-label="Adicionar Água à sacola">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>Pedir</span>
-              </button>
-            </div>
-          </article>
-        </div>
-
-        <!-- Sticky Floating Bag Drawer (Activated when user clicks +) -->
-        <div class="order-bag-bar" id="order-bag-bar" role="region" aria-live="polite" aria-label="Sacola de Pedido">
-          <div class="bag-summary-info">
-            <div class="bag-count-badge" id="bag-count-badge">0</div>
-            <div>
-              <div class="bag-total-text">Total estimado:</div>
-              <div class="bag-total-amount" id="bag-total-amount">R$ 0,00</div>
             </div>
           </div>
-          <button class="btn-shiny btn-primary bag-checkout-btn" id="bag-checkout-btn">
-            <span class="btn-shiny-text">Enviar p/ WhatsApp</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          </button>
         </div>
       </div>
     </section>
 
     <!-- ======================================================================
-         HOW TO ORDER (3 STEPS — MAXIMUM CLARITY)
+         PARTE B: CARDÁPIO SOB DEMANDA (SEÇÕES ESCONDIDAS E ESPECÍFICAS)
          ====================================================================== -->
-    <section class="section-flow" id="como-pedir" aria-label="Como Funciona o Pedido">
+    <section class="menu-on-demand-section scene-menu" id="cardapio" aria-label="Cardápio Oficial Sob Demanda">
+      <div class="container">
+        <div class="section-header reveal-init">
+          <div class="section-tag amber-tag">Cardápio Oficial</div>
+          <h2 class="section-title">O que você quer saborear hoje?</h2>
+          <p class="section-subtitle">Toque na categoria para revelar os itens específicos. Curto por padrão para não cansar sua rolagem.</p>
+        </div>
+
+        <!-- Accordion Exclusivo Sob Demanda (Abrir uma fecha as outras) -->
+        <div class="menu-accordion-container" id="menu-accordion">
+          
+          <!-- Categoria 1: Crepes Salgados -->
+          <div class="menu-cat-card reveal-init" id="cat-card-crepes-salgados">
+            <button class="menu-cat-trigger" aria-expanded="false" aria-controls="panel-crepes-salgados" id="trigger-crepes-salgados">
+              <div class="cat-trigger-info">
+                <div class="cat-icon-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M12 2a10 10 0 0 0-7.07 17.07L12 22l7.07-2.93A10 10 0 0 0 12 2z"/></svg>
+                </div>
+                <div>
+                  <h3 class="cat-title-text">Crepes Salgados</h3>
+                  <div class="cat-subtitle-preview">9 opções na chapa • Costela, Calabresa, Frango, Queijo...</div>
+                </div>
+              </div>
+              <div class="cat-trigger-action">
+                <span class="cat-action-text">Ver Sabores</span>
+                <svg class="cat-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </button>
+
+            <div class="menu-cat-panel" id="panel-crepes-salgados" role="region" aria-labelledby="trigger-crepes-salgados">
+              <div class="cat-items-compact-grid">
+                <!-- Item 1 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Calabresa Queijo</span>
+                    <span class="compact-item-desc">Calabresa fatiada com queijo derretido na chapa.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 10</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20Crepe%20Calabresa%20Queijo%20(R$%2010)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Crepe Calabresa Queijo">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Calabresa Requeijão</span>
+                    <span class="compact-item-desc">Calabresa na chapa com requeijão cremoso.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 10</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20Crepe%20Calabresa%20Requeij%C3%A3o%20(R$%2010)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Crepe Calabresa Requeijão">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Costela com Queijo</span>
+                    <span class="compact-item-desc">Costela bovina desfiada temperada e queijo derretido.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 14</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20Crepe%20Costela%20com%20Queijo%20(R$%2014)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Crepe Costela com Queijo">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Costela Requeijão</span>
+                    <span class="compact-item-desc">Costela desfiada artesanal com requeijão cremoso.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 14</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20Crepe%20Costela%20Requeij%C3%A3o%20(R$%2014)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Crepe Costela Requeijão">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Dois Queijos</span>
+                    <span class="compact-item-desc">Mistura generosa e cremosa de queijos derretidos.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 10</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20Crepe%20Dois%20Queijos%20(R$%2010)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Crepe Dois Queijos">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Frango Cheddar</span>
+                    <span class="compact-item-desc">Frango desfiado suave com cobertura de cheddar cremoso.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 10</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20Crepe%20Frango%20Cheddar%20(R$%2010)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Crepe Frango Cheddar">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 7 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Frango Requeijão</span>
+                    <span class="compact-item-desc">Frango temperadinho com requeijão artesanal.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 10</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20Crepe%20Frango%20Requeij%C3%A3o%20(R$%2010)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Crepe Frango Requeijão">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 8 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Pizza</span>
+                    <span class="compact-item-desc">Queijo derretido, presunto, tomate fresco e orégano.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 10</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20Crepe%20Pizza%20(R$%2010)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Crepe Pizza">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 9 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Queijo</span>
+                    <span class="compact-item-desc">O clássico queijo derretido com massa bem dourada.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 10</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20Crepe%20Queijo%20(R$%2010)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Crepe Queijo">Pedir</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Categoria 2: Crepes Doces -->
+          <div class="menu-cat-card reveal-init" id="cat-card-crepes-doces">
+            <button class="menu-cat-trigger" aria-expanded="false" aria-controls="panel-crepes-doces" id="trigger-crepes-doces">
+              <div class="cat-trigger-info">
+                <div class="cat-icon-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                </div>
+                <div>
+                  <h3 class="cat-title-text">Crepes Doces</h3>
+                  <div class="cat-subtitle-preview">5 opções indulgentes • Nutella, Prestígio, Romeu & Julieta...</div>
+                </div>
+              </div>
+              <div class="cat-trigger-action">
+                <span class="cat-action-text">Ver Sabores</span>
+                <svg class="cat-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </button>
+
+            <div class="menu-cat-panel" id="panel-crepes-doces" role="region" aria-labelledby="trigger-crepes-doces">
+              <div class="cat-items-compact-grid">
+                <!-- Item 1 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Ao Leite</span>
+                    <span class="compact-item-desc">Chocolate ao leite cremoso derretido na massa quentinha.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 10</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20Crepe%20Ao%20Leite%20(R$%2010)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Crepe Ao Leite">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Nutella</span>
+                    <span class="compact-item-desc">Nutella legítima com recheio aveludado e farto.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 14</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20Crepe%20Nutella%20(R$%2014)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Crepe Nutella">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Prestígio</span>
+                    <span class="compact-item-desc">Chocolate derretido com flocos finos de coco ralado.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 9</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20Crepe%20Prest%C3%ADgio%20(R$%209)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Crepe Prestígio">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Romeu e Julieta</span>
+                    <span class="compact-item-desc">Queijo derretido com goiabada cascão tradicional.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 9</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20Crepe%20Romeu%20e%20Julieta%20(R$%209)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Crepe Romeu e Julieta">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Stikadinho</span>
+                    <span class="compact-item-desc">Chocolate ao leite com recheio de morango cremoso.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 10</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20Crepe%20Stikadinho%20(R$%2010)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Crepe Stikadinho">Pedir</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Categoria 3: Churros -->
+          <div class="menu-cat-card amber-cat reveal-init" id="cat-card-churros">
+            <button class="menu-cat-trigger" aria-expanded="false" aria-controls="panel-churros" id="trigger-churros">
+              <div class="cat-trigger-info">
+                <div class="cat-icon-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                </div>
+                <div>
+                  <h3 class="cat-title-text">Churros Irresistíveis</h3>
+                  <div class="cat-subtitle-preview">6 opções crocantes • Recheados, Duplos e Nutella Especial</div>
+                </div>
+              </div>
+              <div class="cat-trigger-action">
+                <span class="cat-action-text">Ver Opções</span>
+                <svg class="cat-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </button>
+
+            <div class="menu-cat-panel" id="panel-churros" role="region" aria-labelledby="trigger-churros">
+              <div class="cat-items-compact-grid">
+                <!-- Item 1 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Recheado Doce de Leite</span>
+                    <span class="compact-item-desc">Churros tradicional frito na hora com doce de leite cremoso.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 10</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20Churros%20Recheado%20Doce%20de%20Leite%20(R$%2010)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Churros Recheado Doce de Leite">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Recheado Chocolate</span>
+                    <span class="compact-item-desc">Churros tradicional com recheio de chocolate aveludado.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 10</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20Churros%20Recheado%20Chocolate%20(R$%2010)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Churros Recheado Chocolate">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Duplo Doce de Leite</span>
+                    <span class="compact-item-desc">Dose dupla de doce de leite: recheio interno e cobertura.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 13</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20Churros%20Duplo%20Doce%20de%20Leite%20(R$%2013)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Churros Duplo Doce de Leite">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Duplo Chocolate</span>
+                    <span class="compact-item-desc">Dobrada de chocolate por dentro e por fora.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 13</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20Churros%20Duplo%20Chocolate%20(R$%2013)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Churros Duplo Chocolate">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Nutella</span>
+                    <span class="compact-item-desc">Churros crocante recheado com pura Nutella.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 13</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20Churros%20Nutella%20(R$%2013)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Churros Nutella">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Nutella Duplo</span>
+                    <span class="compact-item-desc">O ápice do sabor: dupla dose generosa de Nutella.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 16</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20pedir%20o%20Churros%20Nutella%20Duplo%20(R$%2016)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Churros Nutella Duplo">Pedir</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Categoria 4: Adicionais -->
+          <div class="menu-cat-card reveal-init" id="cat-card-adicionais">
+            <button class="menu-cat-trigger" aria-expanded="false" aria-controls="panel-adicionais" id="trigger-adicionais">
+              <div class="cat-trigger-info">
+                <div class="cat-icon-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                </div>
+                <div>
+                  <h3 class="cat-title-text">Adicionais & Frutas</h3>
+                  <div class="cat-subtitle-preview">5 opções extras • Morango, Banana, Kinder Bueno...</div>
+                </div>
+              </div>
+              <div class="cat-trigger-action">
+                <span class="cat-action-text">Ver Extras</span>
+                <svg class="cat-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </button>
+
+            <div class="menu-cat-panel" id="panel-adicionais" role="region" aria-labelledby="trigger-adicionais">
+              <div class="cat-items-compact-grid">
+                <!-- Item 1 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Fruta Banana</span>
+                    <span class="compact-item-desc">Banana fresca fatiada na hora.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 4</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20o%20adicional%20Fruta%20Banana%20(R$%204)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Fruta Banana">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Fruta Morango</span>
+                    <span class="compact-item-desc">Morangos frescos selecionados picadinhos.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 4</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20o%20adicional%20Fruta%20Morango%20(R$%204)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Fruta Morango">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Fruta Uva Verde</span>
+                    <span class="compact-item-desc">Uvas verdes sem semente frescas e docinhas.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 4</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20o%20adicional%20Fruta%20Uva%20Verde%20(R$%204)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Fruta Uva Verde">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Kinder Bueno</span>
+                    <span class="compact-item-desc">Pedaços crocantes com recheio cremoso de avelã.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 5</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20o%20adicional%20Kinder%20Bueno%20(R$%205)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Kinder Bueno">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Stikadinho adicional</span>
+                    <span class="compact-item-desc">Stikadinho extra para turbinar seu recheio.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 4</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20o%20Stikadinho%20adicional%20(R$%204)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Stikadinho adicional">Pedir</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Categoria 5: Bebidas -->
+          <div class="menu-cat-card sky-cat reveal-init" id="cat-card-bebidas">
+            <button class="menu-cat-trigger" aria-expanded="false" aria-controls="panel-bebidas" id="trigger-bebidas">
+              <div class="cat-trigger-info">
+                <div class="cat-icon-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
+                </div>
+                <div>
+                  <h3 class="cat-title-text">Bebidas Geladas</h3>
+                  <div class="cat-subtitle-preview">5 opções refrescantes • Coca-Cola, Guaraná, Sucos, Água...</div>
+                </div>
+              </div>
+              <div class="cat-trigger-action">
+                <span class="cat-action-text">Ver Bebidas</span>
+                <svg class="cat-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </button>
+
+            <div class="menu-cat-panel" id="panel-bebidas" role="region" aria-labelledby="trigger-bebidas">
+              <div class="cat-items-compact-grid">
+                <!-- Item 1 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Coca-Cola</span>
+                    <span class="compact-item-desc">Lata 350ml bem geladinha.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 7</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20a%20Coca-Cola%20(R$%207)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Coca-Cola">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Coca-Cola Zero</span>
+                    <span class="compact-item-desc">Lata zero açúcar bem gelada.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 7</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20a%20Coca-Cola%20Zero%20(R$%207)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Coca-Cola Zero">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Guaraná</span>
+                    <span class="compact-item-desc">Lata 350ml bem gelada.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 7</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20o%20Guaran%C3%A1%20(R$%207)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Guaraná">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Suco Nativo</span>
+                    <span class="compact-item-desc">Suco natural embalado refrescante.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 4</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20o%20Suco%20Nativo%20(R$%204)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Suco Nativo">Pedir</a>
+                  </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="compact-item-row">
+                  <div class="compact-item-meta">
+                    <span class="compact-item-name">Água</span>
+                    <span class="compact-item-desc">Água mineral sem gás 500ml bem gelada.</span>
+                  </div>
+                  <div class="compact-item-right">
+                    <span class="compact-item-price">R$ 4</span>
+                    <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20a%20%C3%81gua%20(R$%204)." target="_blank" rel="noopener noreferrer" class="btn-quick-order" aria-label="Pedir Água">Pedir</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Central Link to Official Platform -->
+        <div style="text-align: center; margin-top: 2.5rem;" class="reveal-init">
+          <a href="https://pedidoaqui.com.br/happycrepe" target="_blank" rel="noopener noreferrer" class="btn-shiny btn-secondary" style="font-size: 0.95rem;">
+            <span>Acessar Cardápio Online Oficial Completo</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         HOW TO ORDER — SCENE 5
+         ====================================================================== -->
+    <section class="section-flow scene-calm" id="como-pedir" aria-label="Como Funciona o Pedido">
       <div class="container">
         <div class="section-header reveal-init">
           <div class="section-tag">Sem Complicação</div>
@@ -932,13 +950,13 @@
           <div class="step-card reveal-init">
             <div class="step-number">01</div>
             <h3 class="step-title">Escolha Seus Sabores</h3>
-            <p class="step-description">Selecione os crepes salgados, doces e churros no cardápio acima ou consulte nosso menu online.</p>
+            <p class="step-description">Abra a categoria acima para ver os itens ou acesse nosso cardápio online com foto.</p>
           </div>
 
           <div class="step-card reveal-init">
             <div class="step-number">02</div>
             <h3 class="step-title">Chame no WhatsApp</h3>
-            <p class="step-description">Clique no botão para abrir nossa conversa com os itens pré-preenchidos ou peça pela plataforma oficial.</p>
+            <p class="step-description">Clique no botão do item ou chame no WhatsApp com seu pedido pronto para confirmação imediata.</p>
           </div>
 
           <div class="step-card reveal-init">
@@ -951,9 +969,9 @@
     </section>
 
     <!-- ======================================================================
-         SCHEDULE & OPERATION HOURS TABLE (REAL LIVE ENGINE)
+         SCHEDULE & OPERATION HOURS TABLE
          ====================================================================== -->
-    <section class="section-flow" id="horarios" aria-label="Horários de Funcionamento">
+    <section class="section-flow scene-calm" id="horarios" aria-label="Horários de Funcionamento">
       <div class="container">
         <div class="section-header reveal-init">
           <div class="section-tag amber-tag">Funcionamento</div>
@@ -1042,9 +1060,9 @@
     </section>
 
     <!-- ======================================================================
-         FAQ ACCORDION (ANSWERING REAL QUESTIONS)
+         FAQ ACCORDION
          ====================================================================== -->
-    <section class="section-flow" id="faq" aria-label="Dúvidas Frequentes">
+    <section class="section-flow scene-calm" id="faq" aria-label="Dúvidas Frequentes">
       <div class="container">
         <div class="section-header reveal-init">
           <div class="section-tag">Perguntas Frequentes</div>
@@ -1107,11 +1125,11 @@
     </section>
 
     <!-- ======================================================================
-         FINAL MONUMENTAL CTA & CONVERSION HUB
+         FINAL MONUMENTAL CTA — SCENE 6
          ====================================================================== -->
-    <section class="final-cta-section" id="contato">
+    <section class="final-cta-section scene-final" id="contato">
       <div class="container">
-        <div class="final-cta-box reveal-init">
+        <div class="final-cta-box reveal-init" id="footer-cta-cluster">
           <img src="/assets/mascote-happy.webp" alt="Mascote oficial Happy Crepe" class="final-cta-mascot" width="90" height="90">
           <div class="section-tag">Faça Seu Pedido</div>
           <h2 class="final-cta-title">Vem ser Happy hoje mesmo.</h2>
@@ -1135,9 +1153,23 @@
     </section>
   </main>
 
-  <!-- ======================================================================
-       SITE FOOTER
-       ====================================================================== -->
+  <!-- Mobile Fixed Order Bar (Aparece quando o CTA do topo sai da tela) -->
+  <aside class="mobile-fixed-order-bar" id="mobile-order-bar" aria-label="Ações Rápidas de Pedido">
+    <div class="mobile-bar-status">
+      <span class="status-dot dot-pulse"></span>
+      <span>Qua–Dom 19h–22h30</span>
+    </div>
+    <div class="mobile-bar-actions">
+      <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener noreferrer" class="btn-shiny btn-primary mobile-bar-btn" id="mobile-bar-wpp">
+        <span>Pedir no WhatsApp</span>
+      </a>
+      <a href="https://pedidoaqui.com.br/happycrepe" target="_blank" rel="noopener noreferrer" class="btn-shiny btn-secondary mobile-bar-btn" id="mobile-bar-menu">
+        <span>Cardápio</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Site Footer -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
@@ -1150,17 +1182,14 @@
         </div>
 
         <div class="footer-social-links">
-          <!-- WhatsApp Link -->
           <a href="https://wa.me/5511940804524?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="WhatsApp Oficial (11) 94080-4524">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           </a>
 
-          <!-- Instagram Link -->
           <a href="https://www.instagram.com/thehappycrepe" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram Oficial @thehappycrepe">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
           </a>
 
-          <!-- Cardápio Link -->
           <a href="https://pedidoaqui.com.br/happycrepe" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Cardápio Oficial Online">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           </a>
@@ -1173,10 +1202,10 @@
     </div>
   </footer>
 
-  <!-- Scripts (GSAP 3 + ScrollTrigger + Three.js for lightweight particle ambient) -->
+  <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
-  <script src="/js/main.js?v=20261011" defer></script>
+  <script src="/js/main.js?v=20261011_v2" defer></script>
 </body>
 </html>
